@@ -1,5 +1,4 @@
 
-
 class SteppingPiece < Piece # Knight: L-shaped
                             # King: 1 in any direction
   KNIGHT_DIRECTION = [[-2,1],[-2,-1],[2,1],[2,-1],[1,-2],[-1,-2],[1,2],[-1,-2]]
@@ -18,7 +17,7 @@ class SteppingPiece < Piece # Knight: L-shaped
 
   def explore_direction(direction)
     row = @position[0]
-    column = @position[1]
+    col = @position[1]
     valid_moves = []
     n_row = direction[0]
     n_col = direction[1]

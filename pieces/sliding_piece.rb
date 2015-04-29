@@ -1,3 +1,4 @@
+
 class SlidingPiece < Piece      # bishop, rook, queen -
                                 # traverse as many spaces as availabe
   ROOK_DIRECTION =[[0,1], [-1, 0], [1, 0], [0, -1]]
@@ -17,7 +18,7 @@ class SlidingPiece < Piece      # bishop, rook, queen -
 
   def explore_direction(direction)
     row = @position[0]
-    column = @position[1]
+    col = @position[1]
     valid_moves = []
     n_row = direction[0]
     n_col = direction[1]
@@ -26,7 +27,7 @@ class SlidingPiece < Piece      # bishop, rook, queen -
     loop do
       break if on_board?(next_move) == false    # If piece is in range of grid
 
-      # If piece exists
+      # If a piece exists on board
       if !@board[*next_move].nil? && self.color == @board[*next_move].color
         break
       elsif !@board[*next_move].nil? && self.color != @board[*next_move].color

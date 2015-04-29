@@ -1,3 +1,4 @@
+
 class Pawn < Piece
   KILLING_DIR = { white: [[-1,-1],[-1, 1]], black: [[1,-1], [1,1]]}
   NORMAL_DIR = { white: [[-1,0]], black: [[1,0]] }
@@ -14,9 +15,9 @@ class Pawn < Piece
     false
   end
 
-  def explore_direction(direction)
+  def explore_direction(direction) #[-1,0]
     row = @position[0]
-    column = @position[1]
+    col = @position[1]
     valid_moves = []
     n_row = direction[0]
     n_col = direction[1]
@@ -26,10 +27,7 @@ class Pawn < Piece
     return valid_moves if on_board?(next_move) == false
 
     # If piece exists
-    if !@board[*next_move].nil? && self.color == @board[*next_move].color
-      return valid_moves
-    elsif !@board[*next_move].nil? && self.color != @board[*next_move].color
-      valid_moves << next_move
+    if !@board[*next_move].nil?
       return valid_moves
     else
       valid_moves << next_move
@@ -40,7 +38,7 @@ class Pawn < Piece
 
   def explore_kill(direction)
     row = @position[0]
-    column = @position[1]
+    col = @position[1]
     valid_moves = []
     n_row = direction[0]
     n_col = direction[1]
@@ -56,43 +54,31 @@ class Pawn < Piece
       valid_moves << next_move
       return valid_moves
     end
+
     valid_moves
   end
 
   def move_dirs
     all_valid_moves = []
 
-    if @moved == false && @color == :white
-      total_dir = INITIAL_DIR[:white] + NORMAL_DIR[:white]
+    if @moved == false
+      total_dir = INITIAL_DIR[@color] + NORMAL_DIR[@color]
       total_dir.each do |direction|
         all_valid_moves += explore_direction(direction)
       end
     end
 
-    if @moved == false && @color == :black
-      total_dir = INITIAL_DIR[:black] + NORMAL_DIR[:black]
-      total_dir.each do |direction|
+    if @moved == true
+      NORMAL_DIR[@color].each do |direction|
         all_valid_moves += explore_direction(direction)
       end
     end
 
-    if @moved == true && @color == :black
-      NORMAL_DIR[:black].each do |direction|
-        all_valid_moves += explore_direction(direction)
-    elsif @moved == true && @color == :white
-      NORMAL_DIR[:white].each do |direction|
-        all_valid_moves += explore_direction(direction)
-      end
+    KILLING_DIR[@color].each do |direction|
+      all_valid_moves += explore_kill(direction)
     end
 
-    if @color == :black
-      KILLING_DIR[:black].each do |direction|
-        all_valid_moves += explore_direction(direction)
-    elsif @color == :white
-      KILLING_DIR[:white].each do |direction|
-        all_valid_moves += explore_direction(direction)
-      end
-    end
+    all_valid_moves
   end
 end
 
