@@ -1,4 +1,5 @@
 
+require 'byebug'
 class SlidingPiece < Piece      # bishop, rook, queen -
                                 # traverse as many spaces as availabe
   ROOK_DIRECTION =[[0,1], [-1, 0], [1, 0], [0, -1]]

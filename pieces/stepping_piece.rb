@@ -1,7 +1,7 @@
 
 class SteppingPiece < Piece # Knight: L-shaped
                             # King: 1 in any direction
-  KNIGHT_DIRECTION = [[-2,1],[-2,-1],[2,1],[2,-1],[1,-2],[-1,-2],[1,2],[-1,-2]]
+  KNIGHT_DIRECTION = [[-2,1],[-2,-1],[2,1],[2,-1],[1,-2],[-1,-2],[1,2],[-1,2]]
   KING_DIRECTION = [[1,0],[1,1],[1,-1],[0,1],[0,-1],[-1,1],[-1,0],[-1,-1]]
 
   def on_board?(position)

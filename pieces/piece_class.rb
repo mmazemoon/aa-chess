@@ -12,6 +12,10 @@ class Piece
     @moved = false
   end
 
+  def inspect
+    @role.to_sym
+  end
+
   def moves
     @valid_moves = []
   end
