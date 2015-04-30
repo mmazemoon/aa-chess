@@ -16,9 +16,27 @@ class Piece
     @role.to_sym
   end
 
-  def moves
-    @valid_moves = []
+  def valid_moves
+    valid_moves = moves.reject do |next_move|
+      move_into_check?(next_move)
+      # the ones that dont put me in check
+    end
   end
 
+  def move_into_check?(next_move)
+  end
 
+  def dup_pieces(board_copy)
+     pieces = @board.flatten.compact
+
+     pieces.each do |obj|
+      pc = Piece.new(board_copy, obj.position, obj.color, obj.role)
+      board_copy[obj.position] = pc
+    end
+    board_copy
+  end
+
+  # def moves
+  #   raise NotImplementedError
+  # end
 end

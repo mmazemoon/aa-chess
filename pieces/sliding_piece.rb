@@ -29,9 +29,9 @@ class SlidingPiece < Piece      # bishop, rook, queen -
       break if on_board?(next_move) == false    # If piece is in range of grid
 
       # If a piece exists on board
-      if !@board[*next_move].nil? && self.color == @board[*next_move].color
+      if !@board[next_move].nil? && self.color == @board[next_move].color
         break
-      elsif !@board[*next_move].nil? && self.color != @board[*next_move].color
+      elsif !@board[next_move].nil? && self.color != @board[next_move].color
         valid_moves << next_move
         break
       else
@@ -46,7 +46,7 @@ end
 
 class Bishop < SlidingPiece
 
-  def move_dirs
+  def moves
     all_valid_moves = []
     BISHOP_DIRECTION.each do |direction|
        all_valid_moves += explore_direction(direction)
@@ -59,7 +59,7 @@ end
 
 class Rook < SlidingPiece
 
-  def move_dirs
+  def moves
     all_valid_moves = []
     ROOK_DIRECTION.each do |direction|
        all_valid_moves += explore_direction(direction)
@@ -71,7 +71,7 @@ end
 
 class Queen < SlidingPiece
 
-  def move_dirs
+  def moves
     all_valid_moves = []
     QUEEN_DIRECTION.each do |direction|
        all_valid_moves += explore_direction(direction)
@@ -80,12 +80,6 @@ class Queen < SlidingPiece
   end
 
 end
-
-
-
-
-
-
 
 # From: Rook class
 #

@@ -27,7 +27,7 @@ class Pawn < Piece
     return valid_moves if on_board?(next_move) == false
 
     # If piece exists
-    if !@board[*next_move].nil?
+    if !@board[next_move].nil?
       return valid_moves
     else
       valid_moves << next_move
@@ -48,9 +48,9 @@ class Pawn < Piece
     return valid_moves if on_board?(next_move) == false
 
     # If piece exists
-    if !@board[*next_move].nil? && self.color == @board[*next_move].color
+    if !@board[next_move].nil? && self.color == @board[next_move].color
       return valid_moves
-    elsif !@board[*next_move].nil? && self.color != @board[*next_move].color
+    elsif !@board[next_move].nil? && self.color != @board[next_move].color
       valid_moves << next_move
       return valid_moves
     end
@@ -58,7 +58,7 @@ class Pawn < Piece
     valid_moves
   end
 
-  def move_dirs
+  def moves
     all_valid_moves = []
 
     if @moved == false
@@ -81,12 +81,3 @@ class Pawn < Piece
     all_valid_moves
   end
 end
-
-# King instance method
-# def move_dirs
-#   all_valid_moves = []
-#   KING_DIRECTION.each do |direction|
-#      all_valid_moves += explore_direction(direction)
-#   end
-#   all_valid_moves
-# end
